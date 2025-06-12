@@ -1,6 +1,8 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
 #include "SpriteSheet.h"
 #include "mappy_A5.h"
 #include <iostream>
@@ -42,6 +44,8 @@ int main(void)
 	al_install_keyboard();
 	al_init_image_addon();
 	al_init_primitives_addon();
+	al_init_font_addon();
+	al_init_ttf_addon();
 
 	player.InitSprites(WIDTH,HEIGHT);
 
@@ -58,6 +62,9 @@ int main(void)
 	al_register_event_source(event_queue, al_get_keyboard_event_source());
 
 	al_start_timer(timer);
+
+	ALLEGRO_FONT* font = al_load_font("minecraft_font.ttf", 24, 0);
+
 	//draw the background tiles
 	MapDrawBG(xOff,yOff, 0, 0, WIDTH-1, HEIGHT-1);
 
@@ -85,8 +92,6 @@ int main(void)
 				player.UpdateSprites(WIDTH,HEIGHT,2);
 			if (player.CollisionEndBlock())
 				cout<<"Hit an End Block\n";
-			if (player.HurtBlock())
-				cout << "Ouch\n";
 			render = true;
 
 		}
