@@ -19,6 +19,7 @@ int main(void)
 	//variables
 	bool done = false;
 	bool render = false;
+	bool gameOver = false; //for ending game
 	//Player Variable
 	Sprite player;
 	const int JUMPIT=1600;
@@ -91,7 +92,7 @@ int main(void)
 			else
 				player.UpdateSprites(WIDTH,HEIGHT,2);
 			if (player.CollisionEndBlock())
-				cout<<"Hit an End Block\n";
+				gameOver = true;
 			render = true;
 
 		}
@@ -175,6 +176,13 @@ int main(void)
 			MapDrawFG(xOff,yOff, 0, 0, WIDTH, HEIGHT, 0);
 			jump=player.jumping(jump,JUMPIT);
 			player.DrawSprites(xOff, yOff);
+
+			if (gameOver) {
+				al_draw_text(font, al_map_rgb(255, 0, 0), WIDTH / 2, HEIGHT / 2, ALLEGRO_ALIGN_CENTER, "YOU WIN!");
+				al_rest(10);
+				done = true;
+			}
+
 			al_flip_display();
 			al_clear_to_color(al_map_rgb(0,0,0));
 		}
