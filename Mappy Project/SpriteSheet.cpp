@@ -46,7 +46,7 @@ void Sprite::UpdateSprites(int width, int height, int dir)
 		if (++frameCount > frameDelay)
 		{
 			frameCount = 0;
-			if (++curFrame > maxFrame)
+			if (++curFrame > 8)
 				curFrame = 1;
 		}
 	}
@@ -56,12 +56,13 @@ void Sprite::UpdateSprites(int width, int height, int dir)
 		if (++frameCount > frameDelay)
 		{
 			frameCount = 0;
-			if (++curFrame > maxFrame)
+			if (++curFrame > 8)
 				curFrame = 1;
 		}
 	}
-	else //represent that they hit the space bar and that mean direction = 0
-		animationDirection = dir;
+	else {//represent that they hit the space bar and that mean direction = 0
+		animationDirection = 2;
+	}
 
 	//check for collided with foreground tiles
 	if (animationDirection == 0)
@@ -112,9 +113,20 @@ int Sprite::jumping(int jump, const int JUMPIT)
 	}
 	else
 	{
-		y -= jump/3; 
-		jump--; 
-		curFrame=0;
+		prevY = y;
+
+		y -= jump / 3;
+		jump--;
+
+		if (jump == JUMPIT - 1) {
+			curFrame = 8;
+		}
+		if (y < prevY) {
+			curFrame = 9;
+		}
+		if (y >= prevY) {
+			curFrame = 10;
+		}
 	}
 
 	if (jump<0) 
@@ -122,6 +134,7 @@ int Sprite::jumping(int jump, const int JUMPIT)
 		if (collided(x + frameWidth/2,  y + frameHeight))
 		{ 
 			jump = JUMPIT; 
+			curFrame = 11;
 			while (collided(x + frameWidth/2,y + frameHeight))
 			{
 				y -= 3;
