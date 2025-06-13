@@ -64,7 +64,7 @@ int main(void)
 
 	al_start_timer(timer);
 
-	ALLEGRO_FONT* font = al_load_font("minecraft_font.ttf", 24, 0);
+	ALLEGRO_FONT* font = al_load_font("minecraft_font.ttf", 76, 0);
 
 	//draw the background tiles
 	MapDrawBG(xOff,yOff, 0, 0, WIDTH-1, HEIGHT-1);
@@ -179,6 +179,7 @@ int main(void)
 
 			if (gameOver) {
 				al_draw_text(font, al_map_rgb(255, 0, 0), WIDTH / 2, HEIGHT / 2, ALLEGRO_ALIGN_CENTER, "YOU WIN!");
+				al_flip_display();
 				al_rest(10);
 				done = true;
 			}
@@ -190,6 +191,7 @@ int main(void)
 	MapFreeMem();
 	al_destroy_event_queue(event_queue);
 	al_destroy_display(display);						//destroy our display object
+	al_destroy_font(font);
 
 	return 0;
 }

@@ -34,7 +34,7 @@ void Sprite::UpdateSprites(int width, int height, int dir)
 
 	if(dir == 1){ //right key
 		animationDirection = 1; 
-		x+=2; 
+		x+=3; 
 		if (++frameCount > frameDelay)
 		{
 			frameCount=0;
@@ -43,7 +43,7 @@ void Sprite::UpdateSprites(int width, int height, int dir)
 		}
 	} else if (dir == 0){ //left key
 		animationDirection = 0; 
-		x-=2; 
+		x-=3; 
 		if (++frameCount > frameDelay)
 		{
 			frameCount=0;
