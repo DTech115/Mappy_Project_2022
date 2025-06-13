@@ -32,10 +32,7 @@ void Sprite::UpdateSprites(int width, int height, int dir)
 	int oldx = x;
 	int oldy = y;
 
-
-	int tileY = y / 32;
-
-	if (collided(x, y) && tileY == 0) {
+	if (collided(x, y) && y / 32 == 0) {
 		x = oldx;
 		y = oldy + 10;
 	}
@@ -61,7 +58,7 @@ void Sprite::UpdateSprites(int width, int height, int dir)
 		}
 	}
 	else {//represent that they hit the space bar and that mean direction = 0
-		animationDirection = 2;
+		animationDirection = dir;
 	}
 
 	//check for collided with foreground tiles
@@ -121,10 +118,10 @@ int Sprite::jumping(int jump, const int JUMPIT)
 		if (jump == JUMPIT - 1) {
 			curFrame = 8;
 		}
-		if (y < prevY) {
+		else if (y < prevY) {
 			curFrame = 9;
 		}
-		if (y >= prevY) {
+		else if (y >= prevY) {
 			curFrame = 10;
 		}
 	}
