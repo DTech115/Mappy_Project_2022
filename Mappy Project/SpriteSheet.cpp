@@ -32,7 +32,10 @@ void Sprite::UpdateSprites(int width, int height, int dir)
 	int oldx = x;
 	int oldy = y;
 
-	if (collided(x, y) && y / 32 == 0) {
+
+	int topTile = y / 32;
+
+	if (collided(x, y) && topTile == 0) {
 		x = oldx;
 		y = oldy + 10;
 	}
